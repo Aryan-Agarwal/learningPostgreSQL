@@ -1,0 +1,62 @@
+Aggregate functions
+
+Take multiple inputs and return a single output
+AVG()
+COUNT()
+MAX()
+MIN()
+SUM()
+ROUND() – to specify precision
+
+SELECT ROUND(AVG(replacement_cost),2)
+FROM film;
+-------------------------
+GROUP BY
+-------------------------
+categorize
+SELECT col, AGG(col) FROM table WHERE col !=’A’ GROUP BY col
+
+SELECT customer_id,SUM(amount) FROM payment
+GROUP BY customer_id
+ORDER BY SUM(amount) DESC
+
+SELECT DATE(payment_date),SUM(amount) FROM payment
+GROUP BY DATE(payment_date)
+ORDER BY SUM(amount) DESC
+-------------------------
+How many payments did each staff member handle and who gets the bonus
+SELECT staff_id,COUNT(amount) FROM payment
+GROUP BY staff_id;
+
+What is the avg replacement cost per mpaa rating
+SELECT rating,ROUND(AVG(replacement_cost),2) 
+FROM film
+GROUP BY rating
+ORDER BY AVG(replacement_cost);
+
+What are the customers ids of the top5 customers by total spend
+SELECT customer_id,SUM(amount)
+FROM payment
+GROUP BY customer_id
+ORDER BY SUM(amount) DESC
+LIMIT 5;
+
+-------------------------------
+HAVING
+-------------------------------
+Allows us to use the aggregate result as a filter along with a GROUP BY
+SELECT store_id,COUNT(customer_id) 
+FROM customer GROUP BY store_id
+HAVING COUNT(customer_id) > 300;
+
+What customer_ids are  eligible for platinum status(40 > transaction)
+SELECT customer_id,COUNT(amount) 
+FROM payment GROUP BY customer_id
+HAVING COUNT(amount) >= 40;
+
+What are the customer ids of customers who have spent more than $100 in payment transactions with our staff_id member 2?
+SELECT customer_id,SUM(amount) FROM payment
+WHERE staff_id = 2
+GROUP BY customer_id
+HAVING SUM(amount) >= 100;
+
