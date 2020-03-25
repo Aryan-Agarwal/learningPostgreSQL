@@ -1,0 +1,68 @@
+JOINS
+Combine info from multiple tables
+
+AS
+Create an alias
+Select column as new_name FROM table
+Select Sum(col) as new_name FROM table
+Cant use with where or having stmt
+
+INNER JOINS
+Result the set of records that match in both tables
+Select * from tableA 
+Inner Join tableB
+On tableA.col_match = tableB.col_match
+
+SELECT payment_id,payment.customer_id,first_name
+FROM payment
+INNER JOIN customer
+ON payment.customer_id = customer.customer_id
+
+FULL OUTER JOINS
+Deal with values only present in one of the table joined
+Select * from tableA
+Full outer join tableB
+On tableA.col = tableB.col
+
+With where stmt (returns unique values and not common ones)
+Select * from tableA
+Full outer join tableB
+On tableA.col = tableB.col
+Where tableA.id IS null OR TableB.id IS null
+SELECT * FROM customer
+FULL OUTER JOIN payment
+ON customer.customer_id = payment.customer_id
+WHERE customer.customer_id IS null
+OR payment.payment_id IS null
+
+LEFT OUTER JOIN
+
+Select * from tableA
+LEFT outer join tableB
+On tableA.col = tableB.col
+
+With where
+Select * from tableA
+Full outer join tableB
+On tableA.col = tableB.col
+Where tableB.id IS null
+
+SELECT film.film_id,title,inventory_id
+FROM film
+LEFT JOIN inventory ON
+inventory.film_id = film.film_id
+WHERE inventory.film_id IS null
+
+RIGHT JOIN
+Same as left join only order is different
+Select * from tableA
+RIGHT outer join tableB
+On tableA.col = tableB.col
+
+
+UNION
+Combines result set of 2 or more select stmts into a single result set
+Select * from tableA
+Union
+Select * from tableB
+(use union all to get duplicates as well)
