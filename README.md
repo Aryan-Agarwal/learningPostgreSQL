@@ -3,7 +3,9 @@
 Learning PostgreSQL (from Udemy)
 
 2 things to install
+
 PostgreSQL – engine to store data and read queries 
+
 PgAdmin – GUI to connect with PostgreSQL
 
 DATABASE:
